@@ -54,8 +54,40 @@ def get_car(car_id):
         'make': car[1],
         'model': car[2],
         'year': car[3],
-        'price': car[4]
+        'vin': car[4],
+        'desc': car[5]
     })
+
+@app.route('/cars', methods=['POST'])
+def add_car():
+    """Add a new car to the database."""
+    data = request.get_json()
+    with sqlite3.connect(db_file) as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO cars (make, model, year, vin, desc) VALUES (?, ?, ?, ?, ?)',
+                       (data['make'], data['model'], data['year'], data['vin'], data['desc']))
+        conn.commit()
+    return jsonify({'message': 'Car added successfully!'}), 201
+
+@app.route('/cars/<int:car_id>', methods=['PUT'])
+def update_car(car_id):
+    """Update details of an existing car."""
+    data = request.get_json()
+    with sqlite3.connect(db_file) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''UPDATE cars SET make = ?, model = ?, year = ?, vin = ?, desc = ? WHERE id = ?''',
+                       (data.get('make'), data.get('model'), data.get('year'), data.get('vin'), data.get('desc'), car_id))
+        conn.commit()
+    return jsonify({'message': 'Car updated successfully!'})
+
+@app.route('/cars/<int:car_id>', methods=['DELETE'])
+def delete_car(car_id):
+    """Delete a car from the database."""
+    with sqlite3.connect(db_file) as conn:
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM cars WHERE id = ?', (car_id,))
+        conn.commit()
+    return jsonify({'message': 'Car deleted successfully!'})
 
 if __name__ == '__main__':
     app.run(debug=True)
