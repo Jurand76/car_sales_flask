@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import sqlite3
 
 # Initlialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Database file
 db_file = 'cars.db'
