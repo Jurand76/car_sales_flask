@@ -10,12 +10,31 @@ header {
     color: white;
     padding: 1em 0;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 nav {
+    background-color: #444;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     justify-content: center;
-    background-color: #444;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
@@ -23,6 +42,7 @@ nav a {
     text-decoration: none;
     padding: 1em;
     display: block;
+    transition: background-color 0.3s;
 }
 
 nav a:hover {
@@ -32,6 +52,20 @@ nav a:hover {
 main {
     padding: 2em;
     text-align: center;
+}
+
+section {
+    display: none;
+    margin: 2em 0;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section.visible {
+    display: block;
 }
 
 table {
