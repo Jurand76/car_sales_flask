@@ -1,4 +1,4 @@
 Website directory:
-- frontend for reading data from jurand.pythonanywhere.com
+- frontend for operating data using jurand.pythonanywhere.com API
 
 app.py - main application for API requests and database operations
